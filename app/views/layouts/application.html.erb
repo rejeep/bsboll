@@ -8,7 +8,19 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <% if player_signed_in? %>
+      <%= link_to 'Sign out', destroy_player_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to 'Sign up', new_player_registration_path %>
+      <%= link_to 'Sign in', new_player_session_path %>
+    <% end %>
+    
     <h1>Bästboll/Sämstboll</h1>
+    
+    <% if flash.present? %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    <% end %>
 
     <%= yield %>
 

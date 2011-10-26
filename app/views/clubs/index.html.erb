@@ -1,10 +1,23 @@
 <h2>Clubs</h2>
 
-<ul>
-  <% @clubs.each do |club| %>
-    <li>
-      <%= link_to club.name, edit_club_path(club) %>
-      (<%= link_to 'remove', club_path(club), :method => :delete, :confirm => 'Are you sure?' %>)
-    </li>
-  <% end %>
-</ul>
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clubs.each do |club| %>
+      <tr>
+        <td>
+          <%= club.name %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_club_path(club), :class => 'btn info' %>
+          <%= link_to 'Remove', club_path(club), :method => :delete, :confirm => 'Are you sure?', :class => 'btn danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

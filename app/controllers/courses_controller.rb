@@ -1,12 +1,6 @@
 class CoursesController < InheritedResources::Base
   before_filter :authenticate_player!
 
-  def index
-    index! do
-      @clubs = Club.all
-    end
-  end
-
   def new
     new! do
       (1..18).each do |nr|

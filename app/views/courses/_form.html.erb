@@ -1,37 +1,37 @@
 <%= simple_form_for @course, :html => { :class => 'form-stacked' } do |form| %>
-<fieldset>
-  <legend>Course information</legend>
-
-  <%= form.association :club %>
-  <%= form.input :name %>
-</fieldset>
-
-<fieldset>
-  <legend>Hole information</legend>
-  <table class="zebra-striped">
-    <thead>
-      <tr>
-        <th>Hole</th>
-        <th>Par</th>
-        <th>Index</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @course.holes.each do |hole| %>
-        <%= form.simple_fields_for :holes, hole do |hole_form| %>
-          <%= hole_form.input :nr, :as => :hidden %>
-          <tr>
-            <td><%= hole.nr %></td>
-            <td><%= hole_form.input :hcp, :as => :select, :collection => (1..18), :label => false, :input_html => { :class => 'span2' } %></td>
-            <td><%= hole_form.input :par, :as => :select, :collection => (3..6), :label => false, :input_html => { :class => 'span2' } %></td>
-          </tr>
+  <fieldset>
+    <legend>Course information</legend>
+   
+    <%= form.association :club %>
+    <%= form.input :name %>
+  </fieldset>
+   
+  <fieldset>
+    <legend>Hole information</legend>
+    <table class="zebra-striped">
+      <thead>
+        <tr>
+          <th>Hole</th>
+          <th>Par</th>
+          <th>Index</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @course.holes.each do |hole| %>
+          <%= form.simple_fields_for :holes, hole do |hole_form| %>
+            <%= hole_form.input :nr, :as => :hidden %>
+            <tr>
+              <td><%= hole.nr %></td>
+              <td><%= hole_form.input :hcp, :as => :select, :collection => (1..18), :label => false, :input_html => { :class => 'span2' } %></td>
+              <td><%= hole_form.input :par, :as => :select, :collection => (3..6), :label => false, :input_html => { :class => 'span2' } %></td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
-</fieldset>
-
-<div class="actions">
-  <%= form.submit :class => 'btn' %>
-</div>
+      </tbody>
+    </table>
+  </fieldset>
+   
+  <div class="actions">
+    <%= form.submit :class => 'btn' %>
+  </div>
 <% end %>

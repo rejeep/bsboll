@@ -1,16 +1,27 @@
 <h2>Courses</h2>
 
-<ul>
-  <% @clubs.each do |club| %>
-    <li>
-      <h3><%= link_to club.name, edit_club_path(club) %></h3>
-      <ul>
-        <% club.courses.each do |course| %>
-          <li>
-            <%= link_to course.name, edit_course_path(course) %>
-            (<%= link_to 'remove', course_path(course), :method => :delete, :confirm => 'Are you sure?' %>)
-          </li>
-        <% end %>
-      </ul>
-  <% end %>
-</ul>
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Club</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td>
+          <%= course.name %>
+        </td>
+        <td>
+          <%= course.club.name %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_course_path(course), :class => 'btn info' %>
+          <%= link_to 'Remove', course_path(course), :method => :delete, :confirm => 'Are you sure?', :class => 'btn danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -7,6 +7,14 @@ class CoursesController < InheritedResources::Base
     end
   end
 
+  def new
+    new! do
+      (1..18).each do |nr|
+        @course.holes.build(:nr => nr)
+      end
+    end
+  end
+  
   def create
     create! { courses_path }
   end

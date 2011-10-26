@@ -2,5 +2,27 @@
   <%= form.association :club %>
   <%= form.input :name %>
 
+  <table>
+    <thead>
+      <tr>
+        <th>Hole</th>
+        <th>Par</th>
+        <th>Index</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @course.holes.each do |hole| %>
+        <%= form.simple_fields_for :holes, hole do |hole_form| %>
+          <%= hole_form.input :nr, :as => :hidden %>
+          <tr>
+            <td><%= hole.nr %></td>
+            <td><%= hole_form.input :hcp, :as => :select, :collection => (1..18), :label => false %></td>
+            <td><%= hole_form.input :par, :as => :select, :collection => (3..6), :label => false%></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
   <%= form.submit %>
 <% end %>

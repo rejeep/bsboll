@@ -1,6 +1,8 @@
 <h2>Start new match</h2>
 
 <%= simple_form_for @match do |form| %>
+  <%= form.input :player_id, :as => :hidden, :input_html => { :value => current_player.id } %>
+  
   <%= form.association :course, :collection => @courses %>
   <%= form.input :points_for_birdie, :as => :integer, :input_html => { :class => 'span1' } %>
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026144047) do
+ActiveRecord::Schema.define(:version => 20111026170517) do
 
   create_table "clubs", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20111026144047) do
     t.integer  "hole_id"
     t.integer  "points_for_birdie",      :default => 0, :null => false
     t.integer  "points_for_closest_pin", :default => 0, :null => false
+    t.integer  "player_id"
   end
 
   create_table "players", :force => true do |t|

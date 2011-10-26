@@ -10,6 +10,7 @@
       <th>Player team 2</th>
       <th>At hole</th>
       <th>Score</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -40,6 +41,11 @@
             <%= [match.team_1.captain.initials, match.team_1.player.initials].join(' & ') %> lead by: <b><%= score_team_1 %></b>
           <% elsif score_team_1 < score_team_2 %>
             <%= [match.team_2.captain.initials, match.team_2.player.initials].join(' & ') %> lead by: <b><%= score_team_2 %></b>
+          <% end %>
+        </td>
+        <td>
+          <% if match.players.include?(current_player) %>
+            <%= link_to 'Go to match', match_path(match), :class => 'btn success' %>
           <% end %>
         </td>
       </tr>

@@ -1,6 +1,7 @@
 class Match < ActiveRecord::Base
   belongs_to :course
   belongs_to :hole
+  belongs_to :player
   has_many :teams
   has_many :scores
 
@@ -129,5 +130,9 @@ class Match < ActiveRecord::Base
     team_min_score = [team_1_score, team_2_score].min
 
     [team_1_score - team_min_score, team_2_score - team_min_score]
+  end
+  
+  def players
+    [team_1.captain, team_1.player, team_2.captain, team_2.player]
   end
 end

@@ -1,0 +1,11 @@
+<% if player_signed_in? %>
+  <div class="box">
+    <%= link_to 'Add new club', new_club_path %>
+    <%= link_to 'List of clubs', clubs_path %>
+  </div>
+
+  <div class="box">
+    <%= link_to 'Add new course', new_course_path %>
+    <%= link_to 'List of courses', courses_path %>
+  </div>
+<% end %>

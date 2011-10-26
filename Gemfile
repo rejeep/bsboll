@@ -5,6 +5,8 @@ gem 'sqlite3'
 gem 'json'
 gem 'jquery-rails'
 gem 'devise', '1.4.9'
+gem 'inherited_resources', '1.3.0'
+gem 'simple_form', '1.5.2'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'

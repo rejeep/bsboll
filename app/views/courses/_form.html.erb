@@ -1,0 +1,6 @@
+<%= simple_form_for @course do |form| %>
+  <%= form.association :club %>
+  <%= form.input :name %>
+
+  <%= form.submit %>
+<% end %>

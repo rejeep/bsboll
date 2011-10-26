@@ -1,0 +1,10 @@
+<h2>Clubs</h2>
+
+<ul>
+  <% @clubs.each do |club| %>
+    <li>
+      <%= link_to club.name, edit_club_path(club) %>
+      (<%= link_to 'remove', club_path(club), :method => :delete, :confirm => 'Are you sure?' %>)
+    </li>
+  <% end %>
+</ul>

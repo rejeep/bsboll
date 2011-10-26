@@ -1,0 +1,16 @@
+<h2>Courses</h2>
+
+<ul>
+  <% @clubs.each do |club| %>
+    <li>
+      <h3><%= link_to club.name, edit_club_path(club) %></h3>
+      <ul>
+        <% club.courses.each do |course| %>
+          <li>
+            <%= link_to course.name, edit_course_path(course) %>
+            (<%= link_to 'remove', course_path(course), :method => :delete, :confirm => 'Are you sure?' %>)
+          </li>
+        <% end %>
+      </ul>
+  <% end %>
+</ul>

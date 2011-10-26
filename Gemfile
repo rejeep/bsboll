@@ -15,4 +15,8 @@ group :development do
   gem 'mongrel'
 end
 
+group :test, :development do
+  gem 'rspec-rails', '~> 2.7'
+end
+
 gem 'jquery-rails'

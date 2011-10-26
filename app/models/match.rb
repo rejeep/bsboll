@@ -16,26 +16,18 @@ class Match < ActiveRecord::Base
   before_create :set_initial_hole
 
   def prev_hole!
-    prev_nr = hole.nr - 1
-    if (1..18).include?(prev_nr)
-      self.hole = course.holes.find_by_nr(prev_nr)
-    end
-    save!
+    goto_hole!(hole.nr - 1)
   end
 
   def next_hole!
-    next_nr = hole.nr + 1
-    if (1..18).include?(next_nr)
-      self.hole = course.holes.find_by_nr(next_nr)
-    else
-      self.hole = nil
-    end
-    save!
+    goto_hole!(hole.nr + 1)
   end
 
   def goto_hole!(nr)
     if (1..18).include?(nr)
       self.hole = course.holes.find_by_nr(nr)
+    else
+      self.hole = nil
     end
     save!
   end
@@ -79,7 +71,7 @@ class Match < ActiveRecord::Base
 
       hcp = hole.hcp
       par = hole.par
-      
+
       team_1_score_hole = 0
       team_2_score_hole = 0
 
@@ -100,7 +92,7 @@ class Match < ActiveRecord::Base
 
       team_1_worst_ball, team_1_best_ball = [point_on_hole_player_1, point_on_hole_player_2].sort
       team_2_worst_ball, team_2_best_ball = [point_on_hole_player_3, point_on_hole_player_4].sort
-      
+
       if team_1_best_ball > team_2_best_ball
         team_1_score_hole += 2
       elsif team_1_best_ball < team_2_best_ball
@@ -122,16 +114,16 @@ class Match < ActiveRecord::Base
           team_2_score_hole += points_for_birdie
         end
       end
-      
+
       team_1_score += team_1_score_hole
       team_2_score += team_2_score_hole
     end
-    
+
     team_min_score = [team_1_score, team_2_score].min
 
     [team_1_score - team_min_score, team_2_score - team_min_score]
   end
-  
+
   def players
     [team_1.captain, team_1.player, team_2.captain, team_2.player]
   end

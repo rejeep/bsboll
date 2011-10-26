@@ -22,8 +22,8 @@
             <%= hole_form.input :nr, :as => :hidden %>
             <tr>
               <td><%= hole.nr %></td>
-              <td><%= hole_form.input :hcp, :as => :select, :collection => (1..18), :label => false, :input_html => { :class => 'span2' } %></td>
-              <td><%= hole_form.input :par, :as => :select, :collection => (3..6), :label => false, :input_html => { :class => 'span2' } %></td>
+              <td><%= hole_form.input :hcp, :input_html => { :class => 'span2' } %></td>
+              <td><%= hole_form.input :par, :input_html => { :class => 'span2' } %></td>
             </tr>
           <% end %>
         <% end %>

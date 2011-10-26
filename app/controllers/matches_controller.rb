@@ -11,8 +11,12 @@ class MatchesController < InheritedResources::Base
 
 
   def show
-    show! do
-      @players = @match.teams.map { |team| [team.captain, team.player] }.flatten
+    if @match.finished?
+      redirect_to results_match_path
+    else
+      show! do
+        @players = @match.teams.map { |team| [team.captain, team.player] }.flatten
+      end
     end
   end
 
@@ -50,6 +54,10 @@ class MatchesController < InheritedResources::Base
     @match.update_attributes(params[:match])
     @match.next_hole!
 
-    redirect_to :back
+    if @match.finished?
+      redirect_to results_match_path
+    else
+      redirect_to :back
+    end
   end
 end

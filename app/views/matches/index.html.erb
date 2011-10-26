@@ -16,8 +16,8 @@
   <tbody>
     <% @matches.each_with_index do |match, index| %>
 
-      <% team_1 = match.teams.first %>
-      <% team_2 = match.teams.last %>
+      <% team_1 = match.team_1 %>
+      <% team_2 = match.team_2 %>
       
       <tr>
         <td><%= index + 1 %></td>
@@ -36,16 +36,20 @@
           <% score_team_1, score_team_2 = match.score %>
           
           <% if score_team_1 == score_team_2 %>
-            TIED
+            Match tied
           <% elsif score_team_1 > score_team_2 %>
-            <%= [match.team_1.captain.initials, match.team_1.player.initials].join(' & ') %> lead by: <b><%= score_team_1 %></b>
+            <%= team_initials(team_1) %> lead by <b><%= score_team_1 %></b>
           <% elsif score_team_1 < score_team_2 %>
-            <%= [match.team_2.captain.initials, match.team_2.player.initials].join(' & ') %> lead by: <b><%= score_team_2 %></b>
+            <%= team_initials(team_2) %> lead by <b><%= score_team_2 %></b>
           <% end %>
         </td>
         <td>
           <% if match.players.include?(current_player) %>
-            <%= link_to 'Go to match', match_path(match), :class => 'btn success' %>
+            <% if match.finished? %>
+              <%= link_to 'See results', match_path(match), :class => 'btn info' %>
+            <% else %>
+              <%= link_to 'Go to match', match_path(match), :class => 'btn success' %>
+            <% end %>
           <% end %>
         </td>
       </tr>

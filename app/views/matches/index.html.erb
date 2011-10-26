@@ -1,0 +1,51 @@
+<h2>Matches</h2>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Captain team 1</th>
+      <th>Player team 1</th>
+      <th>Captain team 2</th>
+      <th>Player team 2</th>
+      <th>At hole</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @matches.each_with_index do |match, index| %>
+
+      <% team_1 = match.teams.first %>
+      <% team_2 = match.teams.last %>
+      
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= team_1.captain %></td>
+        <td><%= team_1.player %></td>
+        <td><%= team_2.captain %></td>
+        <td><%= team_2.player %></td>
+        <td>
+          <% if match.finished? %>
+            Match finished
+          <% else %>
+            <%= match.hole.nr %>
+          <% end %>
+        </td>
+        <td>
+          <% score_team_1, score_team_2 = match.score %>
+          
+          <% if score_team_1 == score_team_2 %>
+            TIED
+          <% elsif score_team_1 > score_team_2 %>
+            <%= [match.team_1.captain.initials, match.team_1.player.initials].join(' & ') %> lead by: <b><%= score_team_1 %></b>
+          <% elsif score_team_1 < score_team_2 %>
+            <%= [match.team_2.captain.initials, match.team_2.player.initials].join(' & ') %> lead by: <b><%= score_team_2 %></b>
+          <% end %>
+        </td>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Start a new match', new_match_path, :class => 'btn' %>

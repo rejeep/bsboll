@@ -4,6 +4,11 @@ class Course < ActiveRecord::Base
   
   belongs_to :club
   has_many :holes, :order => :nr
+  has_many :matches
   
   accepts_nested_attributes_for :holes
+  
+  def to_s
+    name
+  end
 end

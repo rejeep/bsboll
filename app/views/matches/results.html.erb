@@ -1,0 +1,23 @@
+<% if @match.finished? %>
+  <h1>Match done!</h1>
+
+  <% team_1 = @match.teams.first %>
+  <% team_2 = @match.teams.last %>
+
+  <% score_team_1 = team_1.score %>
+  <% score_team_2 = team_2.score %>
+
+  <% if score_team_1 == score_team_2 %>
+    TIED
+  <% elsif score_team_1 > score_team_2 %>
+    Team 1 winners:
+    <%= team_1.captain.name %>
+    <%= team_1.player.name %>
+  <% elsif score_team_1 < score_team_2 %>
+    Team 2 winners:
+    <%= team_2.captain.name %>
+    <%= team_2.player.name %>
+  <% end %>
+  <% else %>
+    Match is still ongoing, see <%= link_to 'list of matches', matches_path %>
+<% end %>

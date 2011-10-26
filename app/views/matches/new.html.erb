@@ -1,0 +1,24 @@
+<h2>Start new match</h2>
+
+<%= simple_form_for @match do |form| %>
+  <%= form.association :course, :collection => @courses %>
+  <%= form.input :points_for_birdie, :as => :integer, :input_html => { :class => 'span1' } %>
+  
+  <% @match.teams.each_with_index do |team, index| %>
+    <%= form.simple_fields_for :teams, team do |team_form| %>
+
+      <fieldset>
+        <legend>Team <%= index + 1 %></legend>
+        <%= team_form.association :captain %>
+        <%= team_form.input :shots_captain, :as => :integer, :input_html => { :class => 'span1' } %>
+        <%= team_form.association :player %>
+        <%= team_form.input :shots_player, :as => :integer, :input_html => { :class => 'span1' } %>
+      </fieldset>
+
+    <% end %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit :class => 'btn' %>
+  </div>
+<% end %>

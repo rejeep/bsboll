@@ -5,5 +5,11 @@ Bsboll::Application.routes.draw do
   
   resources :clubs, :except => :show
   resources :courses, :except => :show
-  resources :matches
+  resources :matches do
+    member do
+      put :prev_hole, :next_hole, :goto_hole
+      get :results
+      post :score
+    end
+  end
 end

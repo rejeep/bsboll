@@ -3,8 +3,8 @@ class Course < ActiveRecord::Base
   validates :club, :presence => true
   
   belongs_to :club
-  has_many :holes, :order => :nr
-  has_many :matches
+  has_many :holes, :dependent => :destroy, :order => :nr
+  has_many :matches, :dependent => :destroy
   
   accepts_nested_attributes_for :holes
   

@@ -2,8 +2,8 @@ class Match < ActiveRecord::Base
   belongs_to :course
   belongs_to :hole
   belongs_to :player
-  has_many :teams
-  has_many :scores
+  has_many :teams, :dependent => :destroy
+  has_many :scores, :dependent => :destroy
 
   validates :course, :presence => true
 

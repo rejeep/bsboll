@@ -1,5 +1,11 @@
-<%= simple_form_for @club do |form| %>
-  <%= form.input :name %>
+<%= simple_form_for @club, :html => { :class => 'form-stacked' } do |form| %>
+  <fieldset>
+    <legend>Club information</legend>
 
-  <%= form.submit %>
+    <%= form.input :name %>
+  </fieldset>
+   
+  <div class="actions">
+    <%= form.submit :class => 'btn' %>
+  </div>
 <% end %>

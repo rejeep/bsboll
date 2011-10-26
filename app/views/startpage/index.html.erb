@@ -1,11 +1,18 @@
 <% if player_signed_in? %>
-  <div class="box">
-    <%= link_to 'Add new club', new_club_path %>
-    <%= link_to 'List of clubs', clubs_path %>
+  <h2>Clubs</h2>
+  <div class="well">
+    <%= link_to 'Add new club', new_club_path, :class => 'btn' %>
+    <%= link_to 'List of clubs', clubs_path, :class => 'btn' %>
   </div>
 
-  <div class="box">
-    <%= link_to 'Add new course', new_course_path %>
-    <%= link_to 'List of courses', courses_path %>
+  <h2>Courses</h2>
+  <div class="well">
+    <%= link_to 'Add new course', new_course_path, :class => 'btn' %>
+    <%= link_to 'List of courses', courses_path, :class => 'btn' %>
+  </div>
+
+  <h2>Play</h2>
+  <div class="well">
+    <%= link_to 'Start a new match', new_match_path, :class => 'btn' %>
   </div>
 <% end %>

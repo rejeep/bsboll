@@ -4,5 +4,6 @@ Bsboll::Application.routes.draw do
   root :to => 'startpage#index'
   
   resources :clubs, :except => :show
-  resources :courses
+  resources :courses, :except => :show
+  resources :matches
 end

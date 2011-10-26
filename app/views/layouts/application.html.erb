@@ -8,21 +8,38 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <% if player_signed_in? %>
-      <%= link_to 'Sign out', destroy_player_session_path, :method => :delete %>
-    <% else %>
-      <%= link_to 'Sign up', new_player_registration_path %>
-      <%= link_to 'Sign in', new_player_session_path %>
-    <% end %>
-    
-    <h1><%= link_to 'Bästboll/Sämstboll', root_path %></h1>
-    
-    <% if flash.present? %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-
-    <%= yield %>
-
+    <div class="container">
+      <div class="row">
+        <div class="span10">
+          <h1>Bästboll/Sämstboll</h1>
+        </div>
+        <div class="span6">
+          <div class="well">
+            <% if player_signed_in? %>
+              <%= link_to 'Sign out', destroy_player_session_path, :method => :delete, :class => 'btn' %>
+            <% else %>
+              <%= link_to 'Sign up', new_player_registration_path, :class => 'btn' %>
+              <%= link_to 'Sign in', new_player_session_path, :class => 'btn' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span16">
+          <% if flash.present? %>
+            <div id="flash">
+              <% flash.each do |type, message| %>
+                <p class="alert-message <%= type %>"><%= message %></p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span16">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

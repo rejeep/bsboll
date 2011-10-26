@@ -1,23 +1,54 @@
-<h1>Hole <%= @match.hole.nr %></h1>
+<% score_team_1, score_team_2 = @match.score %>
 
-<ul>
-  <li>Par: <%= @match.hole.par %></li>
-  <li>HCP: <%= @match.hole.hcp %></li>
-</ul>
-
-<%= simple_form_for @match, :url => score_match_path(@match), :method => :post do |form| %>
-  <% @match.teams.each do |team| %>
-    <% team.players.each do |player| %>
-      <%= form.simple_fields_for :scores, @match.score_for(player) do |score_form| %>
-        <%= score_form.input :match_id, :as => :hidden %>
-        <%= score_form.input :player_id, :as => :hidden, :input_html => { :value => player.id } %>
-        <%= score_form.input :hole_id, :as => :hidden, :input_html => { :value => @match.hole.id } %>
-        <%= score_form.input :score, :as => :integer, :label => player.initials, :input_html => { :class => 'span1' } %>
-      <% end %>
+<div class="row well">
+  <div class="span3">
+    <h1>Hole <%= @match.hole.nr %></h1>
+    <span class="label">
+      PAR <%= @match.hole.par %>
+    </span>
+    <br />
+    <span class="label notice">
+      HCP <%= @match.hole.hcp %>
+    </span>
+  </div>
+  <div class="span2">
+    <h3><%= team_initials(@match.team_1) %></h3>
+    <% if score_team_1 == score_team_2 %>
+      AS
+    <% elsif score_team_1 > score_team_2 %>
+      <%= score_team_1 %> UP
+    <% elsif score_team_1 < score_team_2 %>
+      -<%= score_team_2 %> DOWN
     <% end %>
-  <% end %>
+  </div>
+  <div class="span2">
+    <h3><%= team_initials(@match.team_2) %></h3>
+    <% if score_team_2 == score_team_1 %>
+      AS
+    <% elsif score_team_2 > score_team_1 %>
+      <%= score_team_2 %> UP
+    <% elsif score_team_2 < score_team_1 %>
+      -<%= score_team_1 %> DOWN
+    <% end %>
+  </div>
+</div>
 
-  <div class="actions">
+<%= form_for(@match, :url => score_match_path(@match), :method => :post) do |form| %>
+  <div class="row well">
+    <div style="width: 220px; float: left; margin-left: 10px;">
+      <h2 style="text-align: center;">Team 1</h2>
+      
+      <%= render 'team_form', :team => @match.team_1, :form => form %>
+    </div>
+    <div style="width: 220px; float: left; margin-left: 10px;">
+      <h2 style="text-align: center;">Team 2</h2>
+
+      <%= render 'team_form', :team => @match.team_2, :form => form %>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="actions" style="float: center;">
     <% unless @match.hole.nr == 1 %>
       <%= link_to 'Prev hole', prev_hole_match_path(@match), :class => 'btn', :method => :put %>
     <% end %>
@@ -28,23 +59,3 @@
     <% end %>
   </div>
 <% end %>
-
-<% score_team_1, score_team_2 = @match.score %>
-
-<% if score_team_1 == score_team_2 %>
-  Match is tied
-<% elsif score_team_1 > score_team_2 %>
-  <%= team_initials(team_1) %> lead by: <b><%= score_team_1 %></b>
-<% elsif score_team_1 < score_team_2 %>
-  <%= team_initials(team_2) %> lead by: <b><%= score_team_2 %></b>
-<% end %>
-
-<div class="pagination">
-  <ul>
-    <% (1..18).each do |nr| %>
-      <li class="<%= 'active' if nr == @match.hole.nr %>">
-        <%= link_to nr, goto_hole_match_path(@match, :nr => nr), :method => :put %>
-      </li>
-    <% end %>
-  </ul>
-</div>

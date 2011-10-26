@@ -1,0 +1,9 @@
+<% team.players.each do |player| %>
+  <%= form.fields_for :scores, @match.score_for(player) do |score_form| %>
+    <%= score_form.hidden_field :match_id, :as => :hidden %>
+    <%= score_form.hidden_field :player_id, :as => :hidden, :input_html => { :value => player.id } %>
+    <%= score_form.hidden_field :hole_id, :as => :hidden, :input_html => { :value => @match.hole.id } %>
+    <h4><%= player.initials %></h4>
+    <%= score_form.text_field :score, :as => :integer %>
+  <% end %>
+<% end %>

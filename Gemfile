@@ -12,6 +12,7 @@ end
 
 group :development do
   gem 'heroku'
+  gem 'mongrel'
 end
 
 gem 'jquery-rails'

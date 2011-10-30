@@ -16,6 +16,6 @@ class Player < ActiveRecord::Base
   end
   
   def initials
-    Namn::Base.new(first_name, last_name).initials
+    "#{first_name.chars.first}#{last_name.chars.first}".upcase
   end
 end

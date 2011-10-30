@@ -8,7 +8,6 @@ gem 'sqlite3'
 gem 'json'
 gem 'jquery-rails'
 gem 'css-bootstrap-rails'
-gem 'namn', '0.0.2'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
